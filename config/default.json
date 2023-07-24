@@ -1,0 +1,163 @@
+{
+    "mode": "local",
+    "local": {
+        "database": {
+            "username": "sa",
+            "password": "tech@123",
+            "database": "ivsm",
+            "host": "localhost",
+            "dialect": "mssql",
+            "seederStorage": "sequelize",
+            "seederStorageTableName": "SequelizeData"
+        },
+        "jwtSecret": "bA2xcjpf8y5aSUFsNB2qN5yymUBSs6es3qHoFpGkec75RCeBb8cpKauGefw5qy4",
+        "jwtExpirationInterval": 15,
+        "imageUploadAccountName" : "gs1ivsmimagedev",
+        "imageUploadKey" : "GebrK+bz8DbzTKlmm/wlkc9nog0ro41NFel2A4VfSY6iFyGRlpQXpn+725aKnxjHaG71EbxO4lFfpnLzxJNhaQ==",
+        "imageUploadContainer" : "image",
+        "topics" : {
+            "taskCreate" : {
+                "eventKey" : "kRoRVB5EUTV+ts+0wIFLFf+iINcsVvQIcozo7/1bOk8=",
+                "eventEndPoint" : "https://ivsm-dev-task.canadacentral-1.eventgrid.azure.net/api/events"
+            },
+            "log" : {
+                "eventKey" : "w/fe4oM+HUFl9V/hDt7xBerH7EV6F1a7068wVROrozk=",
+                "eventEndPoint" : "https://ivsm-event-grid-dev.canadacentral-1.eventgrid.azure.net/api/events"
+            },
+            "thumbnailCreation" : {
+                "eventKey" : "UGWp/k2I0BIg+jJZGhT+TTVrpFfvf7XHe0oRoWNC8AA=",
+                "eventEndPoint" : "https://ivsm-dev-thubnail-create.canadacentral-1.eventgrid.azure.net/api/events"
+            }
+        },
+        "vm_path" : "http://20.63.114.249:3000/"
+    },
+    "development": {
+        "database": {
+            "username": "ivsmadmin",
+            "password": "ivsm@Admin",
+            "database": "ivsm-db-dev",
+            "host": "ivsm-db-server-dev.database.windows.net",
+            "dialect": "mssql",
+            "seederStorage": "sequelize",
+            "seederStorageTableName": "SequelizeData",
+            "requestTimeout": 300000
+        },
+        "jwtSecret": "bA2xcjpf8y5aSUFsNB2qN5yymUBSs6es3qHoFpGkec75RCeBb8cpKauGefw5qy4",
+        "jwtExpirationInterval": 120,
+        "imageUploadAccountName" : "gs1ivsmimagedev",
+        "imageUploadKey" : "GebrK+bz8DbzTKlmm/wlkc9nog0ro41NFel2A4VfSY6iFyGRlpQXpn+725aKnxjHaG71EbxO4lFfpnLzxJNhaQ==",
+        "imageUploadContainer" : "image",
+        "topics" : {
+            "taskCreate" : {
+                "eventKey" : "kRoRVB5EUTV+ts+0wIFLFf+iINcsVvQIcozo7/1bOk8=",
+                "eventEndPoint" : "https://ivsm-dev-task.canadacentral-1.eventgrid.azure.net/api/events"
+            },
+            "log" : {
+                "eventKey" : "w/fe4oM+HUFl9V/hDt7xBerH7EV6F1a7068wVROrozk=",
+                "eventEndPoint" : "https://ivsm-event-grid-dev.canadacentral-1.eventgrid.azure.net/api/events"
+            },
+            "thumbnailCreation" : {
+                "eventKey" : "UGWp/k2I0BIg+jJZGhT+TTVrpFfvf7XHe0oRoWNC8AA=",
+                "eventEndPoint" : "https://ivsm-dev-thubnail-create.canadacentral-1.eventgrid.azure.net/api/events"
+            }
+        },
+        "vm_path" : "http://20.63.114.249:3000/"   ,
+        "pharmaURL"  :"https://gs1-pharma-function-pipeline-dev.azurewebsites.net/api/v1/product/create?code=mYTGFtzDnii5Vbu2g81YK5Q1ER1d3GjfDDMh1kOOKYY/DLWO2Qj62w==",
+        "statusUrl": "https://func-gs1-ivsm-core-service-dev.azurewebsites.net/api/v1/service/create-feed?code=DfxvMQ63TcQsLrbA0nugj11HN-94lfPdqHS-IO-Ez3ZRAzFuxnlzSA=="                    
+    },
+    "staging": {
+        "database": {
+            "username": "ivsmadmin",
+            "password": "ivsm@Admin",
+            "database": "ivsm-db-staging",
+            "host": "ivsm-db-server-dev.database.windows.net",
+            "dialect": "mssql",
+            "seederStorage": "sequelize",
+            "seederStorageTableName": "SequelizeData",
+            "requestTimeout": 300000
+        },
+        "jwtSecret": "bA2xcjpf8y5aSUFsNB2qN5yymUBSs6es3qHoFpGkec75RCeBb8cpKauGefw5qy4",
+        "jwtExpirationInterval": 120,
+        "imageUploadAccountName" : "ivsmstagingcoreservice",
+        "imageUploadKey" : "q5pQn8mJY8wOA+g1Z8JY9JGqItWewBmMdVnkXkeTRGxRPSlcm7d3qoKGuLNOssJ3xkek8rIcVuqxVkKmDmqiyA==",
+        "imageUploadContainer" : "image",
+        "topics" : {
+            "taskCreate" : {
+                "eventKey" : "JP2EdkDdN4ZSGh8mHtDe0+LQjcoqDIoZwWwSf9uYsQs=",
+                "eventEndPoint" : "https://ivsm-staging-create-task.canadacentral-1.eventgrid.azure.net/api/events"
+            },
+            "log" : {
+                "eventKey" : "LJq7JttTpRNUwlHDQHiDP74GJRfxdQHaiDZTNyCzqz4=",
+                "eventEndPoint" : "https://ivsm-event-grid-staging.canadacentral-1.eventgrid.azure.net/api/events"
+            },
+            "thumbnailCreation" : {
+                "eventKey" : "w9v55O5Xv5oA2ykgiS7nxTOgIg21DzoavLHrHrmLsww=",
+                "eventEndPoint" : "https://ivsm-staging-thumbnail-create.canadacentral-1.eventgrid.azure.net/api/events"
+            }
+        },
+        "vm_path" : "http://20.63.114.249:3000/" ,
+        "pharmaURL"  :"https://gs1-pharma-function-pipeline-dev.azurewebsites.net/api/v1/product/create?code=mYTGFtzDnii5Vbu2g81YK5Q1ER1d3GjfDDMh1kOOKYY/DLWO2Qj62w==",
+        "statusUrl": "https://func-gs1-ivsm-core-service-staging.azurewebsites.net/api/v1/service/create-feed?code=InN-zXY37gkprIHzdAMydpzQdlMM2If-S7dKr0RSJcyrAzFu08w3LQ=="                    
+    },
+    "uat": {
+        "database": {
+            "username": "sa",
+            "password": "ivsmDB@123",
+            "database": "ivsm",
+            "host": "localhost",
+            "dialect": "mssql",
+            "seederStorage": "json",
+            "seederStoragePath": "./config/sequelize-data.json"
+        },
+        "jwtSecret": "",
+        "jwtExpirationInterval": ""
+    },
+    "ivsmlegacy": {
+        "database": 
+            {
+                "username": "databricks_ro",
+                "password": "bmH2QtF7ZPQ&rg_b",
+                "database": "IVServiceRequestUAT",
+                "host": "sqlmi-datalake-readlayer-predev.public.9d781011eb25.database.windows.net",
+                "port":3342,
+                "dialect": "mssql"      
+            }  
+    },
+    "ivsmlegacyCRM":{
+        "database": {
+            "username": "databricks_ro",
+            "password": "bmH2QtF7ZPQ&rg_b",
+            "database": "ReadLayer_CRM_Data",
+            "host": "sqlmi-datalake-readlayer-predev.public.9d781011eb25.database.windows.net",
+            "port":3342,
+            "dialect": "mssql"      
+        }
+    },
+    "ivsmlegacyGlobal":{
+        "database": {
+            "username": "databricks_ro",
+            "password": "bmH2QtF7ZPQ&rg_b",
+            "database": "Global_UAT",
+            "host": "sqlmi-datalake-readlayer-predev.public.9d781011eb25.database.windows.net",
+            "port":3342,
+            "dialect": "mssql"      
+        }
+    },
+    "ibmDDGS":{
+        "database": {
+            "username": "IvsmPharmaReadOnly",
+            "password": "!Vs@p@2023!",
+            "database": "IVServiceRequestUAT",
+            "host": "IBM-DDGS",
+            "dialect": "mssql"      
+        }
+    }
+}
+
+
+
+
+
+
+
+

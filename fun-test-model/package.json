@@ -1,0 +1,20 @@
+{
+  "name": "gs1-ivsm-model",
+  "version": "1.0.0",
+  "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gs1canada@dev.azure.com/gs1canada/content-capture/_git/gs1-ivsm-model"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.3.7",
+    "sequelize": "^6.20.1",
+    "tedious": "^14.5.0"
+  }
+}
