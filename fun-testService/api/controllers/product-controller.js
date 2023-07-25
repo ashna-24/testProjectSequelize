@@ -19,7 +19,10 @@ exports.createBulkProduct = async(req, res, next) =>{
     const bulkCreateProduct = req.body;
     try{
         const bulkProduct = await Product.bulkCreate(bulkCreateProduct);
-        res.status(201).json(bulkProduct);
+        res.status(201).json({
+            success: true,
+            data: bulkProduct
+        });
     }
     catch(err){
         console.log('Error', err);
@@ -35,15 +38,15 @@ exports.getAllProducts = async (req,res,next)=>{
         const allProducts = await Product.findAll();
         res.status(200).json({
             success:true,
-            message:"List of products...!!",
+            message:"List of products",
             data : allProducts
         })
     }
     catch(err){
-        console.log("ERROR",err);
+        console.log("Error",err);
         res.status(404).json({
             success: false,
-            message: "No available data...!!"
+            message: "No available data"
         })
     }
 }
@@ -55,20 +58,20 @@ exports.deleteProduct = async(req,res,next)=>{
         if(!recordToDelete){
             return res.status(404).json({ 
                 success:false,
-                message: 'ERROR..!! Record not found!' 
+                message: 'Record not found' 
             });
         }
         await recordToDelete.destroy();
         res.status(200).json({
             success:true,
-            message:"Deleted successfully...!!",
+            message:"Deleted successfully",
         })
     }
     catch(err){
-        console.log("ERROR", err);
+        console.log("Error", err);
         res.status(404).json({
             success: false,
-            message:"Error..!!"
+            message:"Error"
         })
     }
 }
@@ -82,10 +85,10 @@ exports.countAllProducts = async(req,res,next)=>{
         })
     }
     catch(err){
-        console.log("ERROR",err);
+        console.log("Error",err);
         res.status(404).json({
             success: false,
-            message: "Unable to count..!!"
+            message: "Unable to count"
         })
     }
 }
@@ -98,22 +101,22 @@ exports.editProductPrice = async(req,res,next)=>{
         if(!recordToEdit){
             return res.status(404).json({ 
                 success:false,
-                message: 'ERROR..!! Record not found!' 
+                message: 'Record not found' 
             });
         }
         recordToEdit.price = updatedPrice;
         await recordToEdit.save();
         res.status(200).json({
             success: true,
-            message:"Updated successfully...!!",
+            message:"Updated successfully",
             data: recordToEdit
         });
     }
     catch(err){
-        console.log("ERROR..!!",err);
+        console.log("Error",err);
         res.status(404).json({
             success: false,
-            message: "Unable to edit..!!"
+            message: "Unable to edit"
         })
     }
 }
@@ -126,22 +129,22 @@ exports.editProductQuantity = async(req,res, next)=>{
         if(!quantityToEdit){
             return res.status(404).json({
                 success: false,
-                message: "ERROR, Record not found..!!"
+                message: "Record not found"
             })
         }
         quantityToEdit.quantity = updatedQuantity;
         await quantityToEdit.save();
         res.status(200).json({
             success:true,
-            message:"Quantity was updated..!!",
+            message:"Quantity was updated",
             data: quantityToEdit
         })
     }
     catch(err){
-        console.log("ERROR..!!",err);
+        console.log("Error",err);
         res.status(404).json({
             success: false,
-            message: "Unable to edit quantity..!!"
+            message: "Unable to edit quantity"
         })
     }
 }
