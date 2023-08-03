@@ -4,7 +4,7 @@
         "database": {
             "username": "sa",
             "password": "tech@123",
-            "database": "ivsm",
+            "database": "master",
             "host": "localhost",
             "dialect": "mssql",
             "seederStorage": "sequelize",

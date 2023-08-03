@@ -1,5 +1,5 @@
 const{Product, User, Cart} = require('../../../fun-test-model/models');
-const { Op } = require('sequelize');
+// const { Op } = require('sequelize');
 
 exports.addtoCart = async(req,res,next)=>{
     const createCart = req.body;
