@@ -1,8 +1,14 @@
 const {Product} = require('../../../fun-test-model/models');
+const token = require('../middlewares/tokens');
+// const jwt = require('jsonwebtoken');
+// const jwtKey = "my_secret_key";
 
 exports.createProductDetails = async (req,res, next)=>{
     const createProduct = req.body;
+    console.log(createProduct);
     try{
+        createProduct.token = req.user.token;
+        console.log(createProduct.token);
         const newProduct = await Product.create(createProduct);
         res.status(201).json(newProduct);
     }

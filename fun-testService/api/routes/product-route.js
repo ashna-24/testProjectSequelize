@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const productData = require('../controllers/product-controller');
+const { jwtMiddleware } = require('../middlewares/tokens')
 
 router.route('/product-data')
-    .post(productData.createProductDetails);
+    .post(jwtMiddleware, productData.createProductDetails);
 
 router.route('/product-bulk-create')
     .post(productData.createBulkProduct);
