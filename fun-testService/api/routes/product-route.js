@@ -4,22 +4,22 @@ const productData = require('../controllers/product-controller');
 const { jwtMiddleware } = require('../middlewares/tokens')
 
 router.route('/product-data')
-    .post(jwtMiddleware, productData.createProductDetails);
+    .post(productData.createProductDetails);
 
 router.route('/product-bulk-create')
     .post(productData.createBulkProduct);
 
 router.route('/all-products')
-    .get(productData.getAllProducts);
+    .get(jwtMiddleware, productData.getAllProducts);
 
 router.route('/delete-product/:id')
-    .delete(productData.deleteProduct);
+    .delete(jwtMiddleware, productData.deleteProduct);
 
 router.route('/count-all-products')
     .get(productData.countAllProducts);
 
 router.route('/edit-price/:id')
-    .put(productData.editProductPrice);
+    .put(jwtMiddleware, productData.editProductPrice);
 
 router.route('/edit-quantity/:id')
     .put(productData.editProductQuantity);

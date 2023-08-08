@@ -21,10 +21,6 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER
       },
-      token: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

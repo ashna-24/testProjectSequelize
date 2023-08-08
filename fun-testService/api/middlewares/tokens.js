@@ -1,31 +1,22 @@
-const httpStatus = require('http-status');
-const { verifyJwtToken } = require('../utils/jwt');
+// const tokendata = [];
 
-const jwtMiddleware = async (req, res, next) => {
-  try {
-    const authHeader = req.headers['authorization'];
-    if (!authHeader){
-      return res
-        .status(httpStatus.UNAUTHORIZED)
-        .json({ status: false, message: 'No token provided.' });
-    }
+// function jwtMiddleware(req, res, next) {
+//   const authheader=req.headers['authorization'];
+//   if (typeof authheader !== 'undefined') {
+//       var bearer = authheader.split(' ')[1];
+//       req.tokens = bearer;
+//       next();
+//   } 
+//   else {
+//       res.sendStatus(403);
+//   }
+// }
 
-    const token = authHeader.split(' ')[1];
-    if (!token) {
-      return res
-        .status(httpStatus.UNAUTHORIZED)
-        .json({ status: false, message: 'Invalid token format.' });
-    }
+const jwt = require('jwt-simple');
+const jwtSecretKey = 'your-secret-key';
 
-    const decodedToken = verifyJwtToken(token);
-    req.user = decodedToken;
-    next();
-  } 
-  catch (err) {
-    return res
-      .status(httpStatus.UNAUTHORIZED)
-      .json({ status: false, message: 'Invalid token.' });
-  }
-};
+function generateToken(payload) {
+  return jwt.encode(payload, jwtSecretKey);
+}
 
-module.exports = {jwtMiddleware};
+module.exports = {generateToken  , tokendata};

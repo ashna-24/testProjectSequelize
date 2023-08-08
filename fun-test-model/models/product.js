@@ -18,11 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     price: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
-    token: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-  }, {
+  }, 
+  {
     sequelize,
     modelName: 'Product',
   });
