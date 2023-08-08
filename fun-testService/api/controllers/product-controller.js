@@ -1,5 +1,5 @@
 const {Product} = require('../../../fun-test-model/models');
-const token = require('../middlewares/tokens');
+const token = require('../middlewares/jwt-web-token');
 const jwt = require('jsonwebtoken');
 const jwtKey = "my_secret_key";
 
@@ -103,7 +103,7 @@ exports.createBulkProduct = async(req, res, next) =>{
 exports.getAllProducts = async (req,res,next)=>{
     try{
         const allProducts = await Product.findAll();
-        jwt.verify(req.tokens, jwtKey, (err, authdata)=>{
+        jwt.verify(req.authUser, jwtKey, (err, authdata)=>{
             res.status(200).json({
                 success:true,
                 message:"List of products",
@@ -124,7 +124,7 @@ exports.deleteProduct = async(req,res,next)=>{
     const deleteData = req.params.id;
     try{
         const recordToDelete = await Product.findByPk(deleteData);
-        jwt.verify(req.tokens, jwtKey, (err, authdata)=>{
+        jwt.verify(req.authUser, jwtKey, (err, authdata)=>{
             if(!recordToDelete){
                 return res.status(404).json({ 
                     success:false,
@@ -184,7 +184,7 @@ exports.editProductPrice = async(req,res,next)=>{
             }
         }
         if(isPresent){
-            jwt.verify(req.tokens, jwtKey, (err, authdata)=>{
+            jwt.verify(req.authUser, jwtKey, (err, authdata)=>{
                 if(!recordToEdit){
                     return res.status(404).json({ 
                         success:false,
@@ -229,7 +229,7 @@ exports.editProductQuantity = async(req,res, next)=>{
             }
         }
         if(isPresent){
-            jwt.verify(req.tokens, jwtKey, (err, authdata)=>{
+            jwt.verify(req.authUser, jwtKey, (err, authdata)=>{
                 if(!quantityToEdit){
                     return res.status(404).json({
                         success: false,

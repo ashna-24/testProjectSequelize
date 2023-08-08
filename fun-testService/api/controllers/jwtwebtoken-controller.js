@@ -2,6 +2,7 @@ const {User} = require('../../../fun-test-model/models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const jwtKey = "my_secret_key";
+const {addToBlacklist} = require('../utils/blacklistUtils');
 
 exports.createUserToken = async(req,res,next)=>{
     const { firstName, lastName, email, password } = req.body;
@@ -30,24 +31,33 @@ exports.createLoginData = async(req,res,next)=>{
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ 
-            where: { email } 
+            where: { 
+                email 
+            } 
         });
-        console.log(user);
-        if (!user) {
-            return res.status(401).json({ 
-                message: 'Invalid credentials' 
-            });
+        if(user){
+            const isValidPassword = await bcrypt.compare(password, user.password);
+            if(isValidPassword){
+                const token = jwt.sign(
+                    { email: user.email }, 
+                    jwtKey, 
+                    { expiresIn: '2d' }
+                );
+                res.status(200).json({ 
+                    token : token 
+                });
+            }
+            else{
+                res.status(400).json({ 
+                    error : "Password Incorrect" 
+                });
+            }
         }
-        const isValidPassword = await bcrypt.compare(password, user.password);
-        if (!isValidPassword) {
-            return res.status(401).json({ 
-                message: 'Invalid credentials' 
-            });
+        else{
+            res.status(404).json({
+                error: "User doesn't exist"
+            })
         }
-        const token = jwt.sign(
-            { email: user.email }, jwtKey, { expiresIn: '2d' }
-        );
-        res.status(200).json({ token });
     } 
     catch (error) {
         console.error('Error logging in:', error);
@@ -55,4 +65,32 @@ exports.createLoginData = async(req,res,next)=>{
             message: 'Internal server error' 
         });
     }
+}
+
+exports.getLogin = async(req,res,next)=>{
+    const tokenPayload = req.authUser;
+    if (!tokenPayload) {
+        return res.status(401).json({ 
+            message: 'Unauthorized' 
+        });
+    }
+    res.status(200).json({ 
+        message: 'Protected route accessed successfully' ,
+        data: tokenPayload
+    });
+}
+
+exports.jwtWebLogout = async(req,res,next)=>{
+    const token = req.headers.authorization;
+
+    if (!token) {
+        return res.sendStatus(401).json({
+            message: 'Unauthorized'
+        });
+    }
+  
+    addToBlacklist(token);
+    res.sendStatus(200).json({
+        status:"Logout successfully"
+    });
 }
