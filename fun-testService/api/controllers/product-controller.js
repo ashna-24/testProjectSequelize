@@ -21,7 +21,11 @@ exports.createProductDetails = async (req,res, next)=>{
         }
         const newProduct = await Product.create(createProduct);
         if(isPresent){
-            const tokens = jwt.sign(token.tokendata[isPresentIndex], jwtKey);
+            const tokens = jwt.sign(
+                token.tokendata[isPresentIndex], 
+                jwtKey,
+                { expiresIn: '2d' }
+            );
             res.json({
                 login: true,
                 token: tokens,
@@ -45,51 +49,13 @@ exports.createProductDetails = async (req,res, next)=>{
 }
 
 exports.createBulkProduct = async(req, res, next) =>{
-    // const bulkCreateProduct = req.body;
-    // try{
-    //     const bulkProduct = await Product.bulkCreate(bulkCreateProduct);
-    //     res.status(201).json({
-    //         success: true,
-    //         data: bulkProduct
-    //     });
-    // }
-    // catch(err){
-    //     console.log('Error', err);
-    //     res.status(404).json({
-    //         success: false,
-    //         message: "Error"
-    //     });
-    // }
     const bulkCreateProduct = req.body;
-    token.tokendata.push(bulkCreateProduct);
-    let isPresent = false;
-    let isPresentIndex = null;
     try{
-        for(let i=0; i< token.tokendata.length ;i++){
-            if((token.tokendata[i].name === bulkCreateProduct.name) && 
-            (token.tokendata[i].description === bulkCreateProduct.description)&&
-            (token.tokendata[i].price === bulkCreateProduct.price)&&
-            (token.tokendata[i].quantity === bulkCreateProduct.quantity)){
-                isPresent = true;
-                isPresentIndex = i;
-                break;
-            }
-        }
         const bulkProduct = await Product.bulkCreate(bulkCreateProduct);
-        if(isPresent){
-            const bulktokens = jwt.sign(token.tokendata[isPresentIndex], jwtKey);
-            res.json({
-                login: true,
-                token: bulktokens,
-                data: bulkProduct,
-            });
-        }
-        else{
-            res.json({
-                login: false,
-                error: "Invalid data",
-            });
-        }
+        res.status(201).json({
+            success: true,
+            data: bulkProduct
+        });
     }
     catch(err){
         console.log('Error', err);
@@ -98,6 +64,44 @@ exports.createBulkProduct = async(req, res, next) =>{
             message: "Error"
         });
     }
+    // const bulkCreateProduct = req.body;
+    // token.tokendata.push(bulkCreateProduct);
+    // let isPresent = false;
+    // let isPresentIndex = null;
+    // try{
+    //     for(let i=0; i< token.tokendata.length ;i++){
+    //         if((token.tokendata[i].name === bulkCreateProduct.name) && 
+    //         (token.tokendata[i].description === bulkCreateProduct.description)&&
+    //         (token.tokendata[i].price === bulkCreateProduct.price)&&
+    //         (token.tokendata[i].quantity === bulkCreateProduct.quantity)){
+    //             isPresent = true;
+    //             isPresentIndex = i;
+    //             break;
+    //         }
+    //     }
+    //     const bulkProduct = await Product.bulkCreate(bulkCreateProduct);
+    //     if(isPresent){
+    //         const bulktokens = jwt.sign(token.tokendata[isPresentIndex], jwtKey);
+    //         res.json({
+    //             login: true,
+    //             token: bulktokens,
+    //             data: bulkProduct,
+    //         });
+    //     }
+    //     else{
+    //         res.json({
+    //             login: false,
+    //             error: "Invalid data",
+    //         });
+    //     }
+    // }
+    // catch(err){
+    //     console.log('Error', err);
+    //     res.status(404).json({
+    //         success: false,
+    //         message: "Error"
+    //     });
+    // }
 }
 
 exports.getAllProducts = async (req,res,next)=>{
@@ -169,7 +173,6 @@ exports.editProductPrice = async(req,res,next)=>{
     const getId = req.params.id;
     const {updatedPrice} = req.body;
     let isPresent = false;
-    let isPresentIndex = null;
     try{
         const recordToEdit = await Product.findByPk(getId);
         console.log(recordToEdit);
@@ -216,7 +219,6 @@ exports.editProductQuantity = async(req,res, next)=>{
     const getPrdtId = req.params.id;
     const {updatedQuantity} = req.body;
     let isPresent = false;
-    let isPresentIndex = null;
     try{
         const quantityToEdit = await Product.findByPk(getPrdtId);
         for(let i=0; i<token.tokendata.length ;i++){

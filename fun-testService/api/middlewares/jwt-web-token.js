@@ -29,10 +29,11 @@ function verifyjwtwebToken(req,res,next) {
   }
 }
 
-module.exports = { verifyjwtwebToken };
+const tokendata = [];
+
+module.exports = { verifyjwtwebToken ,tokendata};
 
 
-// const tokendata = [];
 
 // function jwtMiddleware(req, res, next) {
 //   const authheader=req.headers['authorization'];

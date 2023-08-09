@@ -44,6 +44,7 @@ exports.createLoginData = async(req,res,next)=>{
                     { expiresIn: '2d' }
                 );
                 res.status(200).json({ 
+                    status:"Ok",
                     token : token 
                 });
             }
