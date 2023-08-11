@@ -21,7 +21,7 @@ exports.jwtSampleLogout = async(req,res,next)=>{
             message: 'Unauthorized'
         });
     }
-  
+
     addToBlacklist(token);
     res.sendStatus(200).json({
         status:"Logout successfully"
