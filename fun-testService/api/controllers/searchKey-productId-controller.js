@@ -1,4 +1,4 @@
-const {Product, User, Cart, sequelize} = require('../../../fun-test-model/models');
+const {sequelize} = require('../../../fun-test-model/models');
 
 exports.searchKeyProductId = async (req, res, next) => {
   const { searchKey } = req.body;
@@ -19,7 +19,7 @@ exports.searchKeyProductId = async (req, res, next) => {
         error: 'Product not found',
       });
     }
-    
+    console.log(productDetails);
     return res.json(productDetails);
   }
    catch (err) {

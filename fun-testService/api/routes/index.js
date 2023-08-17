@@ -7,7 +7,7 @@ const cartStoredRoute = require('./cart-stored-route');
 const jwtTokenRoute = require('./jwtwebtoken-route');
 const jwtSimpleRoute = require('./jwt-simple-route');
 const searchProductId = require('./searchKey-productId-route');
-// const searchQuantity = require('./searchKey-quantity-route');
+const searchQuantity = require('./searchKey-quantity-route');
 
 router.get('/status', async (req, res) => {
     res.send('OK');
@@ -27,6 +27,6 @@ router.use(jwtSimpleRoute);
 
 router.use(searchProductId);
 
-// router.use(searchQuantity);
+router.use(searchQuantity);
 
 module.exports = router;

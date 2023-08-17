@@ -9,8 +9,6 @@ module.exports = {
     AS
     BEGIN
       DECLARE @recordExists BIT;
-
-      -- Check if the record exists
       SELECT @recordExists = CASE WHEN EXISTS (SELECT 1 FROM Carts WHERE id = @id) THEN 1 ELSE 0 END;
 
       IF @recordExists = 1
@@ -25,9 +23,7 @@ module.exports = {
       BEGIN
           SELECT 'Record not found.' AS Message;
       END;
-    END;
-
-    `
+    END;`
 
     // // Execute the stored procedure query using queryInterface.sequelize.query
     await queryInterface.sequelize.query(updateProcedure);

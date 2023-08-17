@@ -9,21 +9,39 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    const productDetails =
+    const productDetails =  
+      `CREATE PROCEDURE ProductDetails
+        @productId NVARCHAR(MAX)
+      AS
+      BEGIN
+        DECLARE @sql NVARCHAR(MAX);
+        DECLARE @params NVARCHAR(MAX);
+    
+        SET @sql = N'
+          SELECT *
+          FROM Products
+          WHERE id IN (''' + REPLACE(@productId, ',', ''',''') + ''')
+            OR id LIKE ''%'' + @productId + ''%''
+            OR quantity LIKE ''%'' + @productId + ''%''';
+    
+        SET @params = N'@productId NVARCHAR(MAX)';
+    
+        EXEC sp_executesql @sql, @params, @productId;
+      END;
+      `
     // `CREATE PROCEDURE ProductDetails
-    // @productId NVARCHAR(MAX)
+    //    @productId NVARCHAR(MAX)
     // AS
     // BEGIN
-    // DECLARE @sql NVARCHAR(MAX);
-    
-    // SET @sql = N'
-    // SELECT *
-    // FROM Products
-    // WHERE id IN (' + @productId + ')';
-    
-    // EXEC sp_executesql @sql;
+    //    DECLARE @sql NVARCHAR(MAX);
+    //    SET @sql = N'
+    //       SELECT *
+    //       FROM Products
+    //       WHERE id IN (' + @productId + ')';
+    //    EXEC sp_executesql @sql;
     // END;
     // `
+
     // `CREATE PROCEDURE ProductDetails
     //     @productId VARCHAR
     //   AS
@@ -35,22 +53,6 @@ module.exports = {
     //     WHERE
     //       id LIKE '%' + @productId + '%';
     //   END;`
-
-    `CREATE PROCEDURE ProductDetails
-    @productId NVARCHAR(MAX)
-  AS
-  BEGIN
-    DECLARE @sql NVARCHAR(MAX);
-
-    SET @sql = N'
-      SELECT *
-      FROM Products
-      WHERE id IN (''' + REPLACE(@productId, ',', ''',''') + ''')
-        OR id LIKE ''%'' + @productId + ''%''';
-
-    EXEC sp_executesql @sql;
-  END;
-`
     
     // // Execute the stored procedure query using queryInterface.sequelize.query
     return queryInterface.sequelize.query(productDetails);
