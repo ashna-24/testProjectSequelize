@@ -11,7 +11,7 @@ module.exports = {
         VALUES (@productId, @user, @quantity, GETDATE(), GETDATE());
       END;`
 
-    // // Execute the stored procedure query using queryInterface.sequelize.query
+    // Execute the stored procedure query using queryInterface.sequelize.query
     await queryInterface.sequelize.query(createProcedure);
     
   },

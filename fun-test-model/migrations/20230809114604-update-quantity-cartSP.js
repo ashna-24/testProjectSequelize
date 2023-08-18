@@ -3,27 +3,27 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     const updateProcedure =  `
-    CREATE PROCEDURE UpdateCartQuantity
-      @id INT,
-      @newQuantity INT
-    AS
-    BEGIN
-      DECLARE @recordExists BIT;
-      SELECT @recordExists = CASE WHEN EXISTS (SELECT 1 FROM Carts WHERE id = @id) THEN 1 ELSE 0 END;
-
-      IF @recordExists = 1
+      CREATE PROCEDURE UpdateCartQuantity
+        @id INT,
+        @newQuantity INT
+      AS
       BEGIN
-          UPDATE Carts
-          SET quantity = @newQuantity
-          WHERE id = @id;
+        DECLARE @recordExists BIT;
+        SELECT @recordExists = CASE WHEN EXISTS (SELECT 1 FROM Carts WHERE id = @id) THEN 1 ELSE 0 END;
 
-          SELECT 'Record updated successfully.' AS Message;
-      END
-      ELSE
-      BEGIN
-          SELECT 'Record not found.' AS Message;
-      END;
-    END;`
+        IF @recordExists = 1
+        BEGIN
+            UPDATE Carts
+            SET quantity = @newQuantity
+            WHERE id = @id;
+
+            SELECT 'Record updated successfully.' AS Message;
+        END
+        ELSE
+        BEGIN
+            SELECT 'Record not found.' AS Message;
+        END;
+      END;`
 
     // // Execute the stored procedure query using queryInterface.sequelize.query
     await queryInterface.sequelize.query(updateProcedure);

@@ -16,7 +16,7 @@ module.exports = {
       END;
     `
 
-    // // Execute the stored procedure query using queryInterface.sequelize.query
+    // Execute the stored procedure query using queryInterface.sequelize.query
     return queryInterface.sequelize.query(createProcedure);
   },
 
