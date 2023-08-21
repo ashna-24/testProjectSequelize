@@ -21,8 +21,8 @@ module.exports = {
     
         SELECT DISTINCT p.*
         FROM Products p
-        INNER JOIN @SearchTable sv ON CONVERT(NVARCHAR, p.id) LIKE '%' + sv.Value + '%'
-            OR CONVERT(NVARCHAR, p.quantity) LIKE '%' + sv.Value + '%';
+        INNER JOIN @SearchTable st ON CONVERT(NVARCHAR, p.id) LIKE '%' + st.Value + '%'
+            OR CONVERT(NVARCHAR, p.quantity) LIKE '%' + st.Value + '%';
     END;
     `
     //  `

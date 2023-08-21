@@ -16,7 +16,7 @@ module.exports = {
             UPDATE Carts
             SET quantity = @newQuantity
             WHERE id = @id;
-
+    
             SELECT 'Record updated successfully.' AS Message;
         END
         ELSE
