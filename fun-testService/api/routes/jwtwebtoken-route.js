@@ -15,4 +15,10 @@ router.route('/get-login')
 router.route('/jwt-web-logout')
     .post(jwtwebtoken.jwtWebLogout);
 
+router.route('/update-password/:id')
+    .put(jwtwebtoken.updatePassword);
+
+router.route('/update-data/:id')
+    .put(jwtwebtoken.updateUserdata);
+
 module.exports = router;
