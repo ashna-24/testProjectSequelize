@@ -139,15 +139,11 @@ exports.updateUserdata = async (req, res, next) => {
 
     try {
         const user = await User.findByPk(userId);
-        // console.log(user)
         if (!user) {
             return res.status(404).json({
                 error: 'User not found'
             });
         }
-        const originalFirstName = user.firstName;
-        const originalLastName = user.lastName;
-        const originalEmail = user.email;
 
         if (firstName) {
             user.firstName = firstName;
@@ -160,20 +156,7 @@ exports.updateUserdata = async (req, res, next) => {
         if (email) {
             user.email = email;
         }
-
-        if (
-            user.changed('firstName') ||
-            user.changed('lastName') ||
-            user.changed('email')
-        ) {
-            await user.save();
-        }
-
-        console.log('Original First Name:', originalFirstName);
-        console.log('Original Last Name:', originalLastName);
-        console.log('Original Email:', originalEmail);
-
-        // console.log(user);
+        await user.save();
         res.status(200).json({
             success: true,
             message: "User data was updated",

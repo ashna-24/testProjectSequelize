@@ -37,32 +37,14 @@ module.exports = (sequelize, DataTypes) => {
 
     if (user.changed('firstName')) {
       console.log('First name updated:', user.firstName);
-      await user.update({ 
-        firstName: user.firstName 
-      }, 
-      { 
-        fields: ['firstName'] 
-      });
     }
   
     if (user.changed('lastName')) {
       console.log('Last name updated:', user.lastName);
-      await user.update({ 
-        lastName: user.lastName 
-      }, 
-      { 
-        fields: ['lastName'] 
-      });
     }
   
     if (user.changed('email')) {
       console.log('Email updated:', user.email);
-      await user.update({ 
-        email: user.email 
-      }, 
-      { 
-        fields: ['email'] 
-      });
     }
   })
 
