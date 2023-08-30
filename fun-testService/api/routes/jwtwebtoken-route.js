@@ -21,4 +21,7 @@ router.route('/update-password/:id')
 router.route('/update-data/:id')
     .put(jwtwebtoken.updateUserdata);
 
+// router.route('/delete-all-users')
+//     .delete(jwtwebtoken.deleteAllUsers);
+
 module.exports = router;

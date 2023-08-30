@@ -24,7 +24,9 @@ exports.createProductDetails = async (req,res, next)=>{
             const tokens = jwt.sign(
                 token.tokendata[isPresentIndex], 
                 jwtKey,
-                { expiresIn: '2d' }
+                { 
+                    expiresIn: '2d' 
+                }
             );
             res.json({
                 login: true,
@@ -64,44 +66,6 @@ exports.createBulkProduct = async(req, res, next) =>{
             message: "Error"
         });
     }
-    // const bulkCreateProduct = req.body;
-    // token.tokendata.push(bulkCreateProduct);
-    // let isPresent = false;
-    // let isPresentIndex = null;
-    // try{
-    //     for(let i=0; i< token.tokendata.length ;i++){
-    //         if((token.tokendata[i].name === bulkCreateProduct.name) && 
-    //         (token.tokendata[i].description === bulkCreateProduct.description)&&
-    //         (token.tokendata[i].price === bulkCreateProduct.price)&&
-    //         (token.tokendata[i].quantity === bulkCreateProduct.quantity)){
-    //             isPresent = true;
-    //             isPresentIndex = i;
-    //             break;
-    //         }
-    //     }
-    //     const bulkProduct = await Product.bulkCreate(bulkCreateProduct);
-    //     if(isPresent){
-    //         const bulktokens = jwt.sign(token.tokendata[isPresentIndex], jwtKey);
-    //         res.json({
-    //             login: true,
-    //             token: bulktokens,
-    //             data: bulkProduct,
-    //         });
-    //     }
-    //     else{
-    //         res.json({
-    //             login: false,
-    //             error: "Invalid data",
-    //         });
-    //     }
-    // }
-    // catch(err){
-    //     console.log('Error', err);
-    //     res.status(404).json({
-    //         success: false,
-    //         message: "Error"
-    //     });
-    // }
 }
 
 exports.getAllProducts = async (req,res,next)=>{
@@ -217,7 +181,7 @@ exports.editProductPrice = async(req,res,next)=>{
 
 exports.editProductQuantity = async(req,res, next)=>{
     const getPrdtId = req.params.id;
-    const {updatedQuantity} = req.body;
+    const { updatedQuantity } = req.body;
     let isPresent = false;
     try{
         const quantityToEdit = await Product.findByPk(getPrdtId);

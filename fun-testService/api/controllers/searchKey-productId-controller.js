@@ -22,7 +22,7 @@ exports.searchKeyProductId = async (req, res, next) => {
     console.log(productDetails);
     return res.json(productDetails);
   }
-   catch (err) {
+  catch (err) {
     console.error(err);
     res.status(500).json({
       success: false,

@@ -18,9 +18,9 @@ function verifyjwtsimple(req,res,next) {
     try {
         const simpleAuthUser = token.split(' ')[1];
         if (simpleAuthUser) {
-        const decodedToken = jwt.decode(simpleAuthUser, jwtKey);
-        req.authSimpleUser = decodedToken;
-        return next();
+            const decodedToken = jwt.decode(simpleAuthUser, jwtKey);
+            req.authSimpleUser = decodedToken;
+            return next();
         }
         return res.sendStatus(401);
     } 

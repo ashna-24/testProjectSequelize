@@ -20,8 +20,8 @@ exports.createUserToken = async (req, res, next) => {
             user: createdUser
         });
     } 
-    catch (error) {
-        console.error('Error registering user:', error);
+    catch (err) {
+        console.error('Error registering user:', err);
         res.status(500).json({ 
             message: 'Internal server error' 
         });
@@ -36,14 +36,14 @@ exports.createLoginData = async (req, res, next) => {
                 email 
             } 
         });
-        if (user) {
+        if(user) {
             const isValidPassword = await bcrypt.compare(password, user.password);
             if (isValidPassword) {
                 const token = jwt.sign(
                     { 
                         email: user.email 
                     }, 
-                    jwtKey, 
+                    jwtKey,
                     { 
                         expiresIn: '2d' 
                     }
@@ -52,18 +52,21 @@ exports.createLoginData = async (req, res, next) => {
                     status: "Ok",
                     token: token 
                 });
-            } else {
+            } 
+            else {
                 res.status(400).json({ 
                     error: "Password Incorrect" 
                 });
             }
-        } else {
+        } 
+        else {
             res.status(404).json({
                 error: "User doesn't exist"
             });
         }
-    } catch (error) {
-        console.error('Error logging in:', error);
+    } 
+    catch (err) {
+        console.error('Error logging in:', err);
         res.status(500).json({ 
             message: 'Internal server error' 
         });
@@ -125,8 +128,8 @@ exports.updatePassword = async (req, res, next) => {
             message: 'Password updated successfully' 
         });
     } 
-    catch (error) {
-        console.error('Error updating password:', error);
+    catch (err) {
+        console.error('Error updating password:', err);
         return res.status(500).json({ 
             message: 'Internal server error' 
         });
@@ -170,3 +173,25 @@ exports.updateUserdata = async (req, res, next) => {
         });
     }
 }
+
+// exports.deleteAllUsers = async (req, res, next) => {
+//     try {
+//         await User.destroy({
+//             where: {},
+//             truncate: true
+//         });
+
+//         console.log('All User data deleted.');
+//         res.status(200).json({
+//             success: true,
+//             message: 'All User data deleted.'
+//         });
+//     } 
+//     catch (err) {
+//         console.error('Error deleting User data:', err);
+//         res.status(500).json({
+//             success: false,
+//             message: 'Error deleting User data'
+//         });
+//     }
+// };
