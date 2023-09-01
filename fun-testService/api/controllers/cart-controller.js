@@ -23,8 +23,12 @@ exports.fetchData = async(req,res,next)=>{
     try{
         const fetchCartData = await Cart.findAll({
             include:[
-                {model: Product},
-                {model: User}
+                {
+                    model: Product
+                },
+                {
+                    model: User
+                }
             ]
         });
         res.status(200).json({
