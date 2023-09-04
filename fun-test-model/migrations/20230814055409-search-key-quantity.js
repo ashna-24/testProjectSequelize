@@ -10,21 +10,21 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     const searchKeyQuantity =
-    `CREATE PROCEDURE SearchProducts(@searchKey NVARCHAR(MAX))
-    AS
-    BEGIN
-        DECLARE @SearchTable TABLE (Value NVARCHAR(MAX));
-    
-        INSERT INTO @SearchTable (Value)
-        SELECT value
-        FROM STRING_SPLIT(@searchKey, ',');
-    
-        SELECT DISTINCT p.*
-        FROM Products p
-        INNER JOIN @SearchTable st ON CONVERT(NVARCHAR, p.id) LIKE '%' + st.Value + '%'
-            OR CONVERT(NVARCHAR, p.quantity) LIKE '%' + st.Value + '%';
-    END;
-    `
+      `CREATE PROCEDURE SearchProducts(@searchKey NVARCHAR(MAX))
+      AS
+      BEGIN
+          DECLARE @SearchTable TABLE (Value NVARCHAR(MAX));
+      
+          INSERT INTO @SearchTable (Value)
+          SELECT value
+          FROM STRING_SPLIT(@searchKey, ',');
+      
+          SELECT DISTINCT p.*
+          FROM Products p
+          INNER JOIN @SearchTable st ON CONVERT(NVARCHAR, p.id) LIKE '%' + st.Value + '%'
+              OR CONVERT(NVARCHAR, p.quantity) LIKE '%' + st.Value + '%';
+      END;
+      `
     //  `
     //   CREATE PROCEDURE SearchProducts(@searchKey VARCHAR(MAX))
     //   AS
@@ -36,7 +36,7 @@ module.exports = {
     //     BEGIN
     //       INSERT INTO @SearchValues (Value)
     //       VALUES (SUBSTRING(@searchKey, 1, CHARINDEX(@Separator, @searchKey) - 1));
-
+    
     //       SET @searchKey = SUBSTRING(@searchKey, CHARINDEX(@Separator, @searchKey) + 1, LEN(@searchKey));
     //     END;
 

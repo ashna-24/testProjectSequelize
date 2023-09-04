@@ -13,15 +13,15 @@ module.exports = {
 
         IF @recordExists = 1
         BEGIN
-            UPDATE Carts
-            SET quantity = @newQuantity
-            WHERE id = @id;
-    
-            SELECT 'Record updated successfully.' AS Message;
+          UPDATE Carts
+          SET quantity = @newQuantity
+          WHERE id = @id;
+  
+          SELECT 'Record updated successfully.' AS Message;
         END
         ELSE
         BEGIN
-            SELECT 'Record not found.' AS Message;
+          SELECT 'Record not found.' AS Message;
         END;
       END;`
 

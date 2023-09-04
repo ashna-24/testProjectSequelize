@@ -11,32 +11,20 @@ module.exports = {
      */
     const productDetails =  
 
-    `CREATE PROCEDURE SearchProducts(@searchKey NVARCHAR(MAX))
+    `CREATE PROCEDURE ProductDetails(@productId NVARCHAR(MAX))
     AS
     BEGIN
       DECLARE @SearchTable TABLE (Value NVARCHAR(MAX));
   
       INSERT INTO @SearchTable (Value)
       SELECT value
-      FROM STRING_SPLIT(@searchKey, ',');
+      FROM STRING_SPLIT(@productId, ',');
   
       SELECT DISTINCT p.*
       FROM Products p
       INNER JOIN @SearchTable st ON CONVERT(NVARCHAR, p.id) LIKE '%' + st.Value + '%';
     END;
     `
-
-    // `CREATE PROCEDURE ProductDetails
-    //     @productId VARCHAR
-    //   AS
-    //   BEGIN
-    //     SELECT
-    //       *
-    //     FROM
-    //       Products
-    //     WHERE
-    //       id LIKE '%' + @productId + '%';
-    //   END;`
     
     // Execute the stored procedure query using queryInterface.sequelize.query
     return queryInterface.sequelize.query(productDetails);
